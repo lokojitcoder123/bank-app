@@ -52,7 +52,7 @@ public class Main {
         Double initial = Double.valueOf(amountStr);
         String accountNumber = bankService.openAccount(name,email,type);
         if(initial > 0)
-            bankService.deposit();
+            bankService.deposit(accountNumber, initial, "Inital Deposit");
          System.out.println("Account oppend: " + accountNumber);
     }
 
