@@ -29,11 +29,11 @@ public class Main {
 
             switch(choise){
                 case "1" -> openAccount(scanner, bankService);
-                case "2" -> deposit(scanner);
+                case "2" -> deposit(scanner, bankService);
                 case "3" -> withdraw(scanner);
                 case "4" -> transfer(scanner);
                 case "5" -> statement(scanner);
-                case "6" -> listAccounts(scanner);
+                case "6" -> listAccounts(scanner,bankService);
                 case "7" -> searchAccounts(scanner);
                 case "0" -> running = false;
             }
@@ -50,10 +50,22 @@ public class Main {
         System.out.println("Initial deposit (optional , blank for 0): ");
         String amountStr = scanner.next().trim();
         Double initial = Double.valueOf(amountStr);
-        bankService.openAccount(name,email,type);
+        String accountNumber = bankService.openAccount(name,email,type);
+        if(initial > 0)
+            bankService.deposit();
+         System.out.println("Account oppend: " + accountNumber);
     }
 
-    private void deposit(Scanner scanner) {
+    private void deposit(Scanner scanner , BankService bankService) {
+        System.out.println("Account number:  ");
+        String accountNumber = scanner.nextLine().trim();
+        System.out.println("Ammount: ");
+        Double amount = Double.valueOf(scanner.nextLine().trim());
+        bankService.deposit(accountNumber , amount ,"Deposit");
+        System.out.println("Deposit");
+
+
+
     }
 
     private void withdraw(Scanner scanner) {
@@ -65,7 +77,12 @@ public class Main {
     private void statement(Scanner scanner) {
     }
 
-    private void listAccounts(Scanner scanner) {
+    private void listAccounts(Scanner scanner , BankService bankService) {
+          bankService.listaccounts().forEach(a -> {
+              System.out.println(a.getAccountNumber() + "  |  " + a.getAccountType() +"  |  " + a.getBalance());
+                  }
+
+          );
     }
 
     private void searchAccounts(Scanner scanner) {

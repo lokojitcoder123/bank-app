@@ -18,4 +18,7 @@ public class Transaction {
     }
     public Transaction() {
     }
+
+    public Transaction(String accountNumber, Double amount, String string, String note, LocalDateTime now, Type type) {
+    }
 }
