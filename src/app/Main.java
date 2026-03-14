@@ -23,14 +23,14 @@ public class Main {
                              0) Exit
                     """);
             System.out.println("CHOOSE: ");
-            String choise = scanner.nextLine().trim();
-            System.out.println("CHOISE: " + choise);
+            String choice = scanner.nextLine().trim();
+            System.out.println("CHOISE: " + choice);
 
 
-            switch(choise){
+            switch(choice){
                 case "1" -> openAccount(scanner, bankService);
                 case "2" -> deposit(scanner, bankService);
-                case "3" -> withdraw(scanner);
+                case "3" -> withdraw(scanner,bankService);
                 case "4" -> transfer(scanner);
                 case "5" -> statement(scanner);
                 case "6" -> listAccounts(scanner,bankService);
@@ -41,34 +41,35 @@ public class Main {
     }
 
     private void openAccount(Scanner scanner , BankService bankService) {
-        System.out.println("Coustomer name: ");
+        System.out.println("Customer name: ");
         String name = scanner.next().trim();
-        System.out.println("Coustomer email: ");
+        System.out.println("Customer email: ");
         String email = scanner.next().trim();
         System.out.println("Account Type (SAVINGS/CURRENT): ");
         String type = scanner.next().trim();
         System.out.println("Initial deposit (optional , blank for 0): ");
         String amountStr = scanner.next().trim();
-        Double initial = Double.valueOf(amountStr);
+        double initial = Double.parseDouble(amountStr);
         String accountNumber = bankService.openAccount(name,email,type);
         if(initial > 0)
-            bankService.deposit(accountNumber, initial, "Inital Deposit");
-         System.out.println("Account oppend: " + accountNumber);
+            bankService.deposit(accountNumber, initial, "Initial Deposit" +
+                    " ");
+         System.out.println("Account opened: " + accountNumber);
     }
 
     private void deposit(Scanner scanner , BankService bankService) {
         System.out.println("Account number:  ");
         String accountNumber = scanner.nextLine().trim();
-        System.out.println("Ammount: ");
+        System.out.println("Amount: ");
         Double amount = Double.valueOf(scanner.nextLine().trim());
-        bankService.deposit(accountNumber , amount ,"Deposit");
+        bankService.withdraw(accountNumber , amount ,"Withdrawal");
         System.out.println("Deposit");
 
 
 
     }
 
-    private void withdraw(Scanner scanner) {
+    private void withdraw(Scanner scanner, BankService bankService) {
     }
 
     private void transfer(Scanner scanner) {
