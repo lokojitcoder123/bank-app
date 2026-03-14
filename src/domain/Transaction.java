@@ -4,17 +4,19 @@ import java.time.LocalDateTime;
 
 public class Transaction {
     private String id;
+    private Type type;
     private String accountNumber;
     private Double amount;
     private LocalDateTime timestamp;
     private String note;
 
-    public Transaction(Double amount,String accountNumber,String id ,LocalDateTime timestamp,String note) {
-        this.amount = amount;
+    public Transaction(String accountNumber, Double amount, String id, String note, LocalDateTime timestamp, Type type) {
         this.accountNumber = accountNumber;
+        this.amount = amount;
         this.id = id;
         this.note = note;
-        this.timestamp=timestamp;
+        this.timestamp = timestamp;
+        this.type = type;
     }
 
     public String getAccountNumber() {
@@ -25,20 +27,20 @@ public class Transaction {
         this.accountNumber = accountNumber;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public Double getAmount() {
         return amount;
     }
 
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNote() {
@@ -57,9 +59,11 @@ public class Transaction {
         this.timestamp = timestamp;
     }
 
-    public Transaction() {
+    public Type getType() {
+        return type;
     }
 
-    public Transaction(String accountNumber, Double amount, String string, String note, LocalDateTime now, Type type) {
+    public void setType(Type type) {
+        this.type = type;
     }
 }
